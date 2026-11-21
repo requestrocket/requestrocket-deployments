@@ -1,0 +1,38 @@
+networks:
+  dataplane-net:
+    external: true
+
+secrets:
+  private_key:
+    file: ./secrets/private_key.pem
+  api_key:
+    file: ./secrets/api_key
+
+services:
+  data-plane-blue:
+    image: ghcr.io/requestrocket/data-plane:${IMAGE_TAG:-latest}
+    container_name: data-plane-blue
+    restart: unless-stopped
+    volumes:
+      - ./config.json:/app/config.json:ro
+    secrets:
+      - private_key
+      - api_key
+    networks:
+      - dataplane-net
+    expose:
+      - "3000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.data-plane.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.data-plane.entrypoints=web"
+      - "traefik.http.services.data-plane.loadbalancer.server.port=3000"
+      - "traefik.http.services.data-plane.loadbalancer.healthcheck.path=/health"
+      - "traefik.http.services.data-plane.loadbalancer.healthcheck.interval=10s"
+      - "traefik.http.services.data-plane.loadbalancer.healthcheck.timeout=3s"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

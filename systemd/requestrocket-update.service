@@ -1,0 +1,10 @@
+[Unit]
+Description=RequestRocket data plane image update
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+# Change both paths to the directory where this package is installed.
+WorkingDirectory=/opt/requestrocket
+ExecStart=/usr/bin/timeout 600 /opt/requestrocket/update.sh

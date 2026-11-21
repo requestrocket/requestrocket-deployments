@@ -1,0 +1,11 @@
+{
+  "controlPlaneBase": "https://api.requestrocket.com",
+  "clientId": "replace-with-your-client-id",
+  "deploymentId": "replace-with-your-deployment-id",
+  "publicUrl": "https://your-data-plane.example.com",
+  "pollIntervalMs": 30000,
+  "mongodbUri": "mongodb://mongo:27017/dataplane",
+  "port": 3000,
+  "nodeEnv": "production",
+  "imageTag": "latest"
+}

@@ -1,0 +1,10 @@
+[Unit]
+Description=Hourly RequestRocket data plane update check
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+Unit=requestrocket-update.service
+
+[Install]
+WantedBy=timers.target

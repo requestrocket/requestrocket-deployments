@@ -1,0 +1,14 @@
+Copyright (c) 2026 RequestRocket
+
+These deployment files are provided to RequestRocket customers so they can
+install and operate a RequestRocket data plane on infrastructure they control.
+
+You may copy and use these files for a deployment covered by a current
+RequestRocket deployment license.
+
+You may not redistribute this repository as your own product, remove this
+notice, or publish the RequestRocket data plane image.
+
+The data plane container image is not included in this repository. It is
+pulled from the RequestRocket container registry and is licensed separately.
+These files do not include the image source code.
